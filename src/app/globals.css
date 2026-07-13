@@ -1,0 +1,1251 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+html {
+	scroll-behavior: smooth;
+}
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--font-sans: var(--font-sans), "Inter", system-ui, sans-serif;
+	--font-caveat: var(--font-caveat), "Caveat", cursive;
+	--font-mono: var(--font-geist-mono);
+	--color-sidebar-ring: var(--sidebar-ring);
+	--color-sidebar-border: var(--sidebar-border);
+	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+	--color-sidebar-accent: var(--sidebar-accent);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+	--color-sidebar-primary: var(--sidebar-primary);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+	--color-sidebar: var(--sidebar);
+	--color-chart-5: var(--chart-5);
+	--color-chart-4: var(--chart-4);
+	--color-chart-3: var(--chart-3);
+	--color-chart-2: var(--chart-2);
+	--color-chart-1: var(--chart-1);
+	--color-ring: var(--ring);
+	--color-input: var(--input);
+	--color-border: var(--border);
+	--color-destructive: var(--destructive);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-accent: var(--accent);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-muted: var(--muted);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-secondary: var(--secondary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-primary: var(--primary);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-popover: var(--popover);
+	--color-card-foreground: var(--card-foreground);
+	--color-card: var(--card);
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+	--radius: 0.625rem;
+
+	/* Visitor-paintable brand hue (footer slider). At the default 300 the
+	   three stops match the shipped identity exactly:
+	   239 → #6366f1 · 271 → #a855f7 · 330 → #ec4899 */
+	--paint-h: 300;
+	--brand-from: hsl(calc(var(--paint-h) - 61) 84% 67%);
+	--brand-via: hsl(calc(var(--paint-h) - 29) 91% 65%);
+	--brand-to: hsl(calc(var(--paint-h) + 30) 81% 60%);
+
+	/* A whisper of cool tint so the light base reads as a lit surface, not
+	   dead flat white — the animated background does the rest. */
+	--background: oklch(0.992 0.003 280);
+	--foreground: oklch(0.145 0 0);
+	--card: oklch(1 0 0);
+	--card-foreground: oklch(0.145 0 0);
+	--popover: oklch(1 0 0);
+	--popover-foreground: oklch(0.145 0 0);
+	--primary: oklch(0.205 0 0);
+	--primary-foreground: oklch(0.985 0 0);
+	--secondary: oklch(0.97 0 0);
+	--secondary-foreground: oklch(0.205 0 0);
+	--muted: oklch(0.97 0 0);
+	--muted-foreground: oklch(0.556 0 0);
+	--accent: oklch(0.97 0 0);
+	--accent-foreground: oklch(0.205 0 0);
+	--destructive: oklch(0.577 0.245 27.325);
+	--border: oklch(0.922 0 0);
+	--input: oklch(0.922 0 0);
+	--ring: oklch(0.708 0 0);
+	--chart-1: oklch(0.646 0.222 41.116);
+	--chart-2: oklch(0.6 0.118 184.704);
+	--chart-3: oklch(0.398 0.07 227.392);
+	--chart-4: oklch(0.828 0.189 84.429);
+	--chart-5: oklch(0.769 0.188 70.08);
+	--sidebar: oklch(0.985 0 0);
+	--sidebar-foreground: oklch(0.145 0 0);
+	--sidebar-primary: oklch(0.205 0 0);
+	--sidebar-primary-foreground: oklch(0.985 0 0);
+	--sidebar-accent: oklch(0.97 0 0);
+	--sidebar-accent-foreground: oklch(0.205 0 0);
+	--sidebar-border: oklch(0.922 0 0);
+	--sidebar-ring: oklch(0.708 0 0);
+
+	--grid-line-color: oklch(0.922 0 0 / 0.5);
+}
+
+.dark {
+	/* Lifted off pure black with a faint violet cast — deep-space, not a void. */
+	--background: oklch(0.165 0.014 280);
+	--foreground: oklch(0.985 0 0);
+	--card: oklch(0.205 0 0);
+	--card-foreground: oklch(0.985 0 0);
+	--popover: oklch(0.205 0 0);
+	--popover-foreground: oklch(0.985 0 0);
+	--primary: oklch(0.922 0 0);
+	--primary-foreground: oklch(0.205 0 0);
+	--secondary: oklch(0.269 0 0);
+	--secondary-foreground: oklch(0.985 0 0);
+	--muted: oklch(0.269 0 0);
+	--muted-foreground: oklch(0.708 0 0);
+	--accent: oklch(0.269 0 0);
+	--accent-foreground: oklch(0.985 0 0);
+	--destructive: oklch(0.704 0.191 22.216);
+	--border: oklch(1 0 0 / 20%);
+	--input: oklch(1 0 0 / 15%);
+	--ring: oklch(0.556 0 0);
+	--chart-1: oklch(0.488 0.243 264.376);
+	--chart-2: oklch(0.696 0.17 162.48);
+	--chart-3: oklch(0.769 0.188 70.08);
+	--chart-4: oklch(0.627 0.265 303.9);
+	--chart-5: oklch(0.645 0.246 16.439);
+	--sidebar: oklch(0.205 0 0);
+	--sidebar-foreground: oklch(0.985 0 0);
+	--sidebar-primary: oklch(0.488 0.243 264.376);
+	--sidebar-primary-foreground: oklch(0.985 0 0);
+	--sidebar-accent: oklch(0.269 0 0);
+	--sidebar-accent-foreground: oklch(0.985 0 0);
+	--sidebar-border: oklch(1 0 0 / 10%);
+	--sidebar-ring: oklch(0.556 0 0);
+	--grid-line-color: oklch(1 0 0 / 0.1);
+}
+
+@layer base {
+	* {
+		@apply border-border outline-ring/50;
+	}
+	body {
+		@apply bg-background text-foreground;
+	}
+
+	.bg-grid-pattern {
+		background-color: oklch(var(--background));
+		background-image:
+			linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
+			linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
+		background-size: 25px 25px;
+	}
+
+	.bg-gradient-hero {
+		background: radial-gradient(
+			circle at 50% -20%,
+			oklch(var(--primary) / 0.15),
+			transparent 50%
+		);
+	}
+
+	.text-gradient-hero {
+		background-image: linear-gradient(
+			to right,
+			hsl(320 80% 55%),
+			hsl(270 70% 60%),
+			hsl(240 80% 65%)
+		);
+		color: transparent;
+		-webkit-background-clip: text;
+		background-clip: text;
+	}
+}
+
+body {
+	font-family: var(--font-sans), "Inter", sans-serif;
+}
+
+/* Reusable subtle notebook grid for non-Hero sections */
+.section-grid-bg {
+	background-image: linear-gradient(
+			to right,
+			oklch(0.55 0.02 280 / 0.08) 1px,
+			transparent 1px
+		),
+		linear-gradient(
+			to bottom,
+			oklch(0.55 0.02 280 / 0.08) 1px,
+			transparent 1px
+		);
+	background-size: 32px 32px;
+}
+
+/* Scroll-triggered entrance — initial state hidden, in-view brings it back */
+.in-view-anim {
+	opacity: 0;
+	transform: translateY(16px);
+	transition:
+		opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+		transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-in-view="true"] .in-view-anim,
+.in-view-anim[data-in-view="true"] {
+	opacity: 1;
+	/* "none" em vez de translateY(0): um transform residual quebra o
+	   backdrop-filter dos descendentes no Chromium (vira backdrop root). */
+	transform: none;
+}
+[data-in-view="true"] .in-view-anim-1 {
+	transition-delay: 0.05s;
+}
+[data-in-view="true"] .in-view-anim-2 {
+	transition-delay: 0.18s;
+}
+[data-in-view="true"] .in-view-anim-3 {
+	transition-delay: 0.32s;
+}
+[data-in-view="true"] .in-view-anim-4 {
+	transition-delay: 0.46s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.in-view-anim {
+		opacity: 1 !important;
+		transform: none !important;
+		transition: none !important;
+	}
+}
+
+/* Hero entrance + gradient drift + scribble */
+@keyframes hero-fade-in-up {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes hero-gradient-drift {
+	0%,
+	100% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+}
+
+@keyframes hero-scribble-draw {
+	from {
+		stroke-dashoffset: 1000;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+.hero-anim {
+	opacity: 0;
+	animation: hero-fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-anim-1 {
+	animation-delay: 0.05s;
+}
+.hero-anim-2 {
+	animation-delay: 0.18s;
+}
+.hero-anim-3 {
+	animation-delay: 0.32s;
+}
+.hero-anim-4 {
+	animation-delay: 0.46s;
+}
+.hero-anim-5 {
+	animation-delay: 0.6s;
+}
+
+.hero-name-gradient {
+	background-size: 200% 200%;
+	animation: hero-gradient-drift 8s ease-in-out infinite;
+	filter: drop-shadow(0 0 24px rgba(217, 70, 239, 0.18));
+}
+
+.hero-scribble path {
+	stroke-dasharray: 1000;
+	stroke-dashoffset: 1000;
+	animation: hero-scribble-draw 1.4s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+	animation-delay: 0.7s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.hero-anim,
+	.hero-name-gradient,
+	.hero-scribble path {
+		animation: none !important;
+		opacity: 1 !important;
+	}
+}
+
+/* Projects track — slot width scales from phones up to desktop, and the
+   symmetric inline padding keeps the focused card centred at both ends. */
+.project-track {
+	--slot-w: min(380px, 85vw);
+	padding-inline: calc(50vw - var(--slot-w) / 2);
+}
+@media (min-width: 1280px) {
+	.project-track {
+		--slot-w: 440px;
+	}
+}
+
+/* Project detail — an Apple-style window that grows out of the card. */
+/* Blur comes from the backdrop-blur utility on the element. */
+.detail-scrim {
+	background: rgb(0 0 0 / 0.62);
+	animation: detail-scrim-in 0.28s ease forwards;
+}
+@keyframes detail-scrim-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.detail-panel {
+	background: color-mix(in oklab, var(--card) 78%, transparent);
+	border-color: color-mix(in oklab, var(--accent-to) 28%, var(--border));
+	box-shadow:
+		0 40px 120px -40px rgb(0 0 0 / 0.75),
+		0 0 60px -30px color-mix(in oklab, var(--accent-to) 60%, transparent);
+	transform-origin: center;
+	animation: detail-panel-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes detail-panel-in {
+	from {
+		opacity: 0;
+		transform: scale(0.94) translateY(18px);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+	}
+}
+
+.detail-rule {
+	position: absolute;
+	inset-inline: 0;
+	top: 0;
+	height: 3px;
+	background: linear-gradient(to right, var(--accent-from), var(--accent-to));
+	z-index: 30;
+}
+
+.detail-title {
+	background-image: linear-gradient(
+		100deg,
+		var(--accent-from),
+		var(--accent-to)
+	);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+.detail-section-title {
+	color: color-mix(in oklab, var(--accent-to) 70%, var(--foreground));
+}
+
+.detail-metric {
+	color: color-mix(in oklab, var(--accent-to) 72%, var(--foreground));
+}
+
+/* Bullets rendered as drafting ticks rather than dots. */
+.detail-bullet {
+	position: relative;
+	padding-left: 1.15rem;
+}
+.detail-bullet::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.6em;
+	width: 8px;
+	height: 1px;
+	background: var(--accent-to);
+	opacity: 0.8;
+}
+
+.detail-challenge {
+	border-left: 2px solid color-mix(in oklab, var(--accent-to) 45%, transparent);
+	padding-left: 1rem;
+}
+
+.detail-tick {
+	margin-top: 0.55em;
+	flex: none;
+	width: 6px;
+	height: 6px;
+	border-radius: 9999px;
+	background: linear-gradient(120deg, var(--accent-from), var(--accent-to));
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.detail-scrim,
+	.detail-panel {
+		animation: none;
+	}
+}
+
+/* Hero badge — technical status chip with a live pulse dot. */
+.hero-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
+	padding: 0.5rem 1rem;
+	border-radius: 9999px;
+	border: 1px solid var(--border);
+	background: color-mix(in oklab, var(--card) 55%, transparent);
+	backdrop-filter: blur(8px);
+	font-family: var(--font-mono), ui-monospace, monospace;
+	font-size: 11px;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--foreground);
+}
+.hero-badge-dot {
+	width: 7px;
+	height: 7px;
+	border-radius: 9999px;
+	background: #22c55e;
+	box-shadow: 0 0 0 0 rgb(34 197 94 / 0.6);
+	animation: contact-status-pulse 2.2s ease-out infinite;
+}
+
+/* Hero buttons — pills that flood with the galaxy gradient bottom-up on
+   hover (Tate-Law-style), with a magnetic arrow. */
+.hero-btn {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.95rem 1.7rem;
+	border-radius: 9999px;
+	font-size: 1rem;
+	font-weight: 600;
+	overflow: hidden;
+	isolation: isolate;
+	transition:
+		transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+		box-shadow 0.35s ease,
+		color 0.35s ease,
+		border-color 0.35s ease;
+}
+.hero-btn::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	background: linear-gradient(120deg, var(--brand-from), var(--brand-via), var(--brand-to));
+	transform: translateY(101%);
+	transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-btn:hover {
+	transform: translateY(-2px);
+}
+.hero-btn:hover::before {
+	transform: translateY(0);
+}
+.hero-btn:hover {
+	color: #fff;
+	box-shadow: 0 16px 40px -14px color-mix(in oklab, var(--brand-via) 55%, transparent);
+}
+.hero-btn-fill {
+	color: var(--foreground);
+	background: linear-gradient(
+		120deg,
+		color-mix(in oklab, var(--brand-from) 24%, transparent),
+		color-mix(in oklab, var(--brand-via) 20%, transparent),
+		color-mix(in oklab, var(--brand-to) 24%, transparent)
+	);
+	border: 1px solid color-mix(in oklab, var(--brand-via) 42%, transparent);
+	backdrop-filter: blur(10px);
+}
+.hero-btn-outline {
+	border: 1px solid var(--border);
+	color: var(--foreground);
+	background: color-mix(in oklab, var(--card) 45%, transparent);
+	backdrop-filter: blur(6px);
+}
+.hero-btn-outline:hover {
+	border-color: transparent;
+}
+.hero-btn-arrow {
+	transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-btn:hover .hero-btn-arrow {
+	transform: translateX(4px);
+}
+
+.hero-btn-ghost {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.95rem 1.2rem;
+	font-size: 1rem;
+	font-weight: 500;
+	color: var(--muted-foreground);
+	transition: color 0.3s ease;
+}
+.hero-btn-ghost:hover {
+	color: var(--foreground);
+}
+.hero-btn-ghost-label {
+	background-image: linear-gradient(90deg, var(--color-primary), var(--brand-via), var(--brand-to));
+	background-size: 0% 2px;
+	background-position: 0 100%;
+	background-repeat: no-repeat;
+	padding-bottom: 3px;
+	transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-btn-ghost:hover .hero-btn-ghost-label {
+	background-size: 100% 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.hero-btn,
+	.hero-btn::before,
+	.hero-btn-arrow {
+		transition: none;
+	}
+}
+
+/* About: lemontree-style stat blocks — rounded colored cards, huge number,
+   playful tilt on hover, accent wash always slightly present. */
+.about-stat {
+	position: relative;
+	overflow: hidden;
+	border-radius: 1.25rem;
+	border: 1px solid var(--border);
+	background:
+		linear-gradient(
+			140deg,
+			color-mix(in oklab, var(--accent-from) 12%, transparent),
+			color-mix(in oklab, var(--accent-to) 7%, transparent)
+		),
+		color-mix(in oklab, var(--card) 62%, transparent);
+	padding: 1.5rem 1.75rem;
+	transition:
+		transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+		border-color 0.35s ease,
+		box-shadow 0.45s ease;
+}
+.about-stat:hover {
+	transform: translateY(-6px) rotate(var(--tilt));
+	border-color: color-mix(in oklab, var(--accent-to) 45%, transparent);
+	box-shadow: 0 22px 48px -24px color-mix(in oklab, var(--accent-to) 55%, transparent);
+}
+.about-stat-value {
+	background-image: linear-gradient(
+		100deg,
+		var(--accent-from),
+		var(--accent-to)
+	);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.about-stat {
+		transition: none;
+	}
+}
+
+/* Contact: giant e-mail CTA that paints itself on hover (ink -> galaxy). */
+.contact-mail {
+	position: relative;
+	padding-bottom: 10px;
+}
+.contact-mail-text {
+	transition: color 0.35s ease;
+}
+.contact-mail:hover .contact-mail-text,
+.contact-mail:focus-visible .contact-mail-text {
+	background-image: linear-gradient(90deg, var(--color-primary), var(--brand-via), var(--brand-to));
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+.contact-mail-arrow {
+	transition:
+		transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+		color 0.35s ease;
+	color: var(--muted-foreground);
+}
+.contact-mail:hover .contact-mail-arrow,
+.contact-mail:focus-visible .contact-mail-arrow {
+	transform: translate(6px, -6px);
+	color: var(--brand-to);
+}
+.contact-mail-rule {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 3px;
+	background: linear-gradient(90deg, var(--color-primary), var(--brand-via), var(--brand-to));
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.contact-mail:hover .contact-mail-rule,
+.contact-mail:focus-visible .contact-mail-rule {
+	transform: scaleX(1);
+}
+
+.contact-social-text {
+	background-image: linear-gradient(90deg, var(--color-primary), var(--brand-via), var(--brand-to));
+	background-size: 0% 2px;
+	background-position: 0 100%;
+	background-repeat: no-repeat;
+	transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	padding-bottom: 2px;
+}
+.contact-social:hover .contact-social-text,
+.contact-social:focus-visible .contact-social-text {
+	background-size: 100% 2px;
+}
+
+.contact-status-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 9999px;
+	background: #22c55e;
+	box-shadow: 0 0 0 0 rgb(34 197 94 / 0.55);
+	animation: contact-status-pulse 2.2s ease-out infinite;
+}
+@keyframes contact-status-pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgb(34 197 94 / 0.55);
+	}
+	70% {
+		box-shadow: 0 0 0 9px rgb(34 197 94 / 0);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgb(34 197 94 / 0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.contact-status-dot {
+		animation: none;
+	}
+}
+
+/* Footer hue picker — the visitor paints the site's brand colour. */
+.paint-slider {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 220px;
+	height: 8px;
+	border-radius: 9999px;
+	border: 1px solid var(--border);
+	background: linear-gradient(
+		90deg,
+		hsl(0 84% 64%),
+		hsl(60 84% 58%),
+		hsl(120 70% 52%),
+		hsl(180 75% 52%),
+		hsl(240 84% 66%),
+		hsl(300 84% 64%),
+		hsl(360 84% 64%)
+	);
+	outline: none;
+	cursor: pointer;
+}
+.paint-slider::-webkit-slider-thumb {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 18px;
+	height: 18px;
+	border-radius: 9999px;
+	background: var(--brand-via);
+	border: 2px solid var(--background);
+	box-shadow:
+		0 0 0 1.5px var(--brand-via),
+		0 2px 10px -2px rgb(0 0 0 / 0.5);
+	transition: transform 0.15s ease;
+}
+.paint-slider::-webkit-slider-thumb:hover {
+	transform: scale(1.15);
+}
+.paint-slider::-moz-range-thumb {
+	width: 18px;
+	height: 18px;
+	border-radius: 9999px;
+	background: var(--brand-via);
+	border: 2px solid var(--background);
+	box-shadow:
+		0 0 0 1.5px var(--brand-via),
+		0 2px 10px -2px rgb(0 0 0 / 0.5);
+}
+.paint-slider:focus-visible {
+	box-shadow: 0 0 0 2px color-mix(in oklab, var(--brand-via) 55%, transparent);
+}
+
+/* Theme switch = paint: the new theme is revealed by a growing circular
+   clip (driven from Header via the View Transitions API). Default crossfade
+   is disabled so only the wash reads. */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation: none;
+	mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+	z-index: 1;
+}
+::view-transition-new(root) {
+	z-index: 2;
+}
+
+/* Transition veil — a skewed panel whose leading edge draws a diagonal line
+   across the screen (dobre.agency-style). Doubles as the preloader on first
+   paint and as the curtain for page/language/theme switches. */
+.veil {
+	pointer-events: none;
+}
+.veil[data-state="covering"],
+.veil[data-state="closing"] {
+	pointer-events: auto;
+}
+
+.veil-panel {
+	position: absolute;
+	inset: -12% -38%;
+	background:
+		radial-gradient(
+			90% 120% at 75% 20%,
+			oklch(0.24 0.07 300 / 0.85),
+			transparent 60%
+		),
+		oklch(0.13 0.02 295);
+	transform: translateX(-116%) skewX(-12deg);
+}
+/* Leading edge: the diagonal brand-gradient line. */
+.veil-panel::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 3px;
+	background: linear-gradient(to bottom, var(--brand-from), var(--brand-via), var(--brand-to));
+	box-shadow: 0 0 24px 2px color-mix(in oklab, var(--brand-via) 55%, transparent);
+}
+
+.veil[data-state="covering"] .veil-panel {
+	transform: translateX(0) skewX(-12deg);
+}
+.veil[data-state="closing"] .veil-panel {
+	transform: translateX(0) skewX(-12deg);
+	transition: transform 0.56s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.veil[data-state="opening"] .veil-panel {
+	transform: translateX(116%) skewX(-12deg);
+	transition: transform 0.68s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.veil[data-state="idle"] .veil-panel {
+	transform: translateX(-116%) skewX(-12deg);
+	transition: none;
+}
+
+/* No-JS safety valve: if hydration never flips the state, the covering
+   panel sweeps itself away and reveals the content. */
+.veil[data-state="covering"] .veil-panel {
+	animation: veil-auto-open 0.68s cubic-bezier(0.76, 0, 0.24, 1) 3s forwards;
+}
+@keyframes veil-auto-open {
+	to {
+		transform: translateX(116%) skewX(-12deg);
+	}
+}
+
+.veil-brand {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 14px;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+.veil[data-state="covering"] .veil-brand,
+.veil[data-state="closing"] .veil-brand {
+	opacity: 1;
+	transition-delay: 0.2s;
+}
+
+.veil-progress {
+	width: 132px;
+	height: 1.5px;
+	overflow: hidden;
+	background: rgb(255 255 255 / 0.14);
+	position: relative;
+}
+.veil-progress::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	transform: translateX(-100%);
+	background: linear-gradient(to right, var(--brand-from), var(--brand-via), var(--brand-to));
+	animation: veil-progress-run 1.1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes veil-progress-run {
+	to {
+		transform: translateX(100%);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.veil {
+		display: none !important;
+	}
+}
+
+/* Lab: Tate-Law-style typographic tiles. At rest: dark tile, huge title.
+   Touched: the tile floods bottom-up with its accent pair, a geometric shape
+   blooms behind the text, and the detail line inks in. */
+/* Hairlines come from per-tile borders — a grid background would sit behind
+   the translucent tiles and block the universe showing through the glass. */
+.lab-grid {
+	gap: 0;
+	background: transparent;
+}
+
+/* Blur comes from Tailwind's backdrop-blur utility on the element — the
+   bundler's prefixer mangles a hand-written backdrop-filter here. */
+.lab-tile {
+	min-height: 250px;
+	background: color-mix(in oklab, var(--card) 55%, transparent);
+	border: 0.5px solid var(--border);
+	outline: none;
+}
+
+.lab-tile-paint {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+	transform: scaleY(0);
+	transform-origin: bottom;
+	transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lab-tile:hover .lab-tile-paint,
+.lab-tile:focus-visible .lab-tile-paint {
+	transform: scaleY(1);
+}
+
+.lab-tile-shape {
+	position: absolute;
+	right: -40px;
+	bottom: -40px;
+	width: 190px;
+	height: 190px;
+	background: rgb(0 0 0 / 0.16);
+	opacity: 0;
+	transform: scale(0.5) rotate(-14deg);
+	transition:
+		transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+		opacity 0.45s ease;
+}
+.lab-tile-shape-circle {
+	border-radius: 9999px;
+}
+.lab-tile-shape-square {
+	border-radius: 18px;
+}
+.lab-tile-shape-triangle {
+	background: transparent;
+	border-left: 95px solid transparent;
+	border-right: 95px solid transparent;
+	border-bottom: 165px solid rgb(0 0 0 / 0.16);
+	width: 0;
+	height: 0;
+}
+.lab-tile:hover .lab-tile-shape,
+.lab-tile:focus-visible .lab-tile-shape {
+	opacity: 1;
+	transform: scale(1) rotate(0deg);
+}
+
+.lab-tile-title {
+	color: var(--foreground);
+	transition: color 0.35s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lab-tile:hover .lab-tile-title,
+.lab-tile:focus-visible .lab-tile-title {
+	color: oklch(0.16 0.02 300);
+	transform: translateX(6px);
+}
+
+.lab-tile-desc,
+.lab-tile-cta {
+	opacity: 0;
+	transform: translateY(8px);
+	transition:
+		opacity 0.4s ease 0.08s,
+		transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.08s,
+		color 0.3s ease;
+}
+.lab-tile:hover .lab-tile-desc,
+.lab-tile:hover .lab-tile-cta,
+.lab-tile:focus-visible .lab-tile-desc,
+.lab-tile:focus-visible .lab-tile-cta {
+	opacity: 1;
+	transform: translateY(0);
+	color: oklch(0.2 0.02 300);
+}
+.lab-tile:hover .lab-tile-meta,
+.lab-tile:focus-visible .lab-tile-meta {
+	color: oklch(0.25 0.02 300);
+}
+.lab-tile:hover .lab-tile-tags span,
+.lab-tile:focus-visible .lab-tile-tags span {
+	color: oklch(0.22 0.02 300);
+	border-color: oklch(0.22 0.02 300 / 0.35);
+}
+
+/* Touch devices never hover: keep the detail visible and hint the accent. */
+@media (hover: none) {
+	.lab-tile-desc,
+	.lab-tile-cta {
+		opacity: 1;
+		transform: none;
+	}
+	.lab-tile {
+		border-left: 3px solid var(--accent-to);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.lab-tile-paint,
+	.lab-tile-shape,
+	.lab-tile-title,
+	.lab-tile-desc,
+	.lab-tile-cta {
+		transition: none !important;
+	}
+}
+
+/* Soft seams between sections — the Projects band uses a different background
+   (bg-secondary/20), which otherwise meets its neighbours on a hard horizontal
+   line. These gradients dissolve the colour change over ~140px on each edge.
+   z-index 1 keeps them above the section background but below the cards (z-10). */
+#projects::before,
+#projects::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 140px;
+	z-index: 1;
+	pointer-events: none;
+}
+#projects::before {
+	top: 0;
+	background: linear-gradient(to bottom, var(--background), transparent);
+}
+#projects::after {
+	bottom: 0;
+	background: linear-gradient(to top, var(--background), transparent);
+}
+
+/* A gentle exit from the hero so its grid + drafting marks don't stop dead. */
+#hero::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 120px;
+	z-index: 0;
+	pointer-events: none;
+	background: linear-gradient(to top, var(--background), transparent);
+}
+
+/* Lenis inertial scrolling — native smooth-scroll must yield to it. */
+html.lenis,
+html.lenis body {
+	height: auto;
+}
+.lenis.lenis-smooth {
+	scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+	overflow: hidden;
+}
+
+/* Hero: the name sharpens as the pointer approaches it. */
+.hero-name-focus {
+	transition: filter 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: filter;
+}
+
+/* Hero: drafting overlay (alignment circle + edge crosshairs) */
+.hero-blueprint {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	overflow: hidden;
+}
+
+.hero-blueprint-circle {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: min(85.8vw, 836px);
+	aspect-ratio: 1;
+	translate: -50% -50%;
+	border: 1px solid var(--border);
+	border-radius: 9999px;
+	opacity: 0.45;
+	/* Dissolve the top/bottom arcs so the ring never hard-clips at the
+	   section edge — it fades into the background instead. */
+	-webkit-mask-image: linear-gradient(
+		to bottom,
+		transparent,
+		#000 22%,
+		#000 78%,
+		transparent
+	);
+	mask-image: linear-gradient(
+		to bottom,
+		transparent,
+		#000 22%,
+		#000 78%,
+		transparent
+	);
+}
+
+.hero-crosshair {
+	position: absolute;
+	top: 50%;
+	width: 14px;
+	height: 14px;
+	translate: 0 -50%;
+	opacity: 0.5;
+	background:
+		linear-gradient(var(--border), var(--border)) center / 100% 1px no-repeat,
+		linear-gradient(var(--border), var(--border)) center / 1px 100% no-repeat;
+}
+.hero-crosshair-left {
+	left: 5vw;
+}
+.hero-crosshair-right {
+	right: 5vw;
+}
+
+.hero-status-bars {
+	flex: 1;
+	height: 8px;
+	max-width: 340px;
+	opacity: 0.35;
+	background-image: repeating-linear-gradient(
+		to right,
+		currentColor 0 1px,
+		transparent 1px 3px,
+		currentColor 3px 5px,
+		transparent 5px 9px
+	);
+}
+
+/* Projects: panels gain their color as they reach focus. */
+.project-panel {
+	background: color-mix(in oklab, var(--card) 68%, transparent);
+	transition:
+		transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+		border-color 0.5s ease,
+		box-shadow 0.5s ease;
+}
+.project-panel[data-active="true"],
+.project-panel:hover {
+	transform: translateY(-8px);
+	border-color: color-mix(in oklab, var(--accent-to) 45%, transparent);
+	box-shadow: 0 24px 60px -28px color-mix(in oklab, var(--accent-to) 60%, transparent);
+}
+
+.project-paint {
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	background: linear-gradient(155deg, var(--accent-from), var(--accent-to));
+	opacity: 0;
+	transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-panel[data-active="true"] .project-paint,
+.project-panel:hover .project-paint {
+	opacity: 0.12;
+}
+
+.project-rule {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	transform: scaleX(0);
+	transform-origin: left;
+	background: linear-gradient(to right, var(--accent-from), var(--accent-to));
+	transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-panel[data-active="true"] .project-rule,
+.project-panel:hover .project-rule {
+	transform: scaleX(1);
+}
+
+.project-image {
+	filter: grayscale(1) contrast(1.05);
+	transform: scale(1.02);
+	transition:
+		filter 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+		transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-panel[data-active="true"] .project-image,
+.project-panel:hover .project-image {
+	filter: grayscale(0) contrast(1);
+	transform: scale(1);
+}
+
+/* Image-less projects get a painted plate instead of a screenshot. */
+.project-plate {
+	background:
+		linear-gradient(
+			155deg,
+			color-mix(in oklab, var(--accent-from) 14%, transparent),
+			color-mix(in oklab, var(--accent-to) 14%, transparent)
+		),
+		var(--secondary);
+	background-image: linear-gradient(
+			to right,
+			var(--grid-line-color) 1px,
+			transparent 1px
+		),
+		linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
+	background-size: 24px 24px;
+}
+
+.project-title {
+	transition: color 0.4s ease;
+}
+.project-panel[data-active="true"] .project-title,
+.project-panel:hover .project-title {
+	background-image: linear-gradient(
+		to right,
+		var(--accent-from),
+		var(--accent-to)
+	);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+.project-metric {
+	color: color-mix(in oklab, var(--accent-to) 70%, var(--foreground));
+}
+
+.project-link {
+	color: var(--muted-foreground);
+	transition: color 0.3s ease;
+}
+.project-panel[data-active="true"] .project-link,
+.project-panel:hover .project-link {
+	color: color-mix(in oklab, var(--accent-to) 75%, var(--foreground));
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.hero-name-focus {
+		filter: none !important;
+		transition: none !important;
+	}
+	.project-panel,
+	.project-paint,
+	.project-rule,
+	.project-image {
+		transition: none !important;
+	}
+}
+
+@media print {
+	/* Hide the site chrome — never the CV's own header, which carries the
+	   name and contact details. */
+	header:not(.cv-header),
+	footer,
+	.no-print {
+		display: none !important;
+	}
+
+	html,
+	body {
+		background: white !important;
+		color: black !important;
+	}
+
+	.cv-document {
+		max-width: none !important;
+	}
+
+	.cv-section,
+	.cv-job {
+		page-break-inside: avoid;
+		break-inside: avoid;
+	}
+
+	a {
+		text-decoration: none !important;
+		color: black !important;
+	}
+
+	@page {
+		margin: 1.5cm;
+		size: A4;
+	}
+}
+
+/* Urgência no backlog: card pisca quando faltam <5 dias pra entrega. */
+@keyframes urgentBlink {
+	0%, 100% {
+		border-color: var(--destructive, #ef4444);
+		box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.0);
+	}
+	50% {
+		border-color: var(--destructive, #ef4444);
+		box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.45);
+	}
+}
+.urgent-blink {
+	animation: urgentBlink 1.1s ease-in-out infinite;
+	border-color: var(--destructive, #ef4444);
+}
+@media (prefers-reduced-motion: reduce) {
+	.urgent-blink {
+		animation: none;
+		box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.55);
+	}
+}
